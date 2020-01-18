@@ -23,6 +23,13 @@ namespace StickyPOC
         public MainWindow()
         {
             InitializeComponent();
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
+            {
+                DefaultValue = FindResource(typeof(Window))
+            });
+#if DEBUG
+            this.ShowInTaskbar = true;
+#endif
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -31,10 +38,15 @@ namespace StickyPOC
                 this.DragMove();
         }
 
-
-        private void btnClose_MouseDown(object sender, MouseButtonEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(Header.FontFamily.ToString());
+            System.Diagnostics.Debug.WriteLine(this.FontFamily.ToString());
         }
     }
 }

@@ -10,34 +10,63 @@
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         MouseDown="Window_MouseDown"
-        Title="MainWindow" Height="450" Width="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" 
-              Background="#0073c1" 
-              Name="TopBlock" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="40" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="Hoje, 17 de Jan" 
-                       Foreground="White" 
-                       VerticalAlignment="Center" 
-                       Margin="8" 
-                       FontWeight="SemiBold"
-                       FontSize="16" />
-            <fa:FontAwesome Icon="Close" 
-                            HorizontalAlignment="Right"
-                            Grid.Column="1"
-                            Margin="0,3,6,0"
-                            Foreground="White"
-                            FontSize="20"
-                            MouseDown="btnClose_MouseDown" />
-        </Grid>
-        <local:DailyTasks  Grid.Row="1" />
-    </Grid>
+        BorderBrush="Gray"
+        BorderThickness="1"
+        FontFamily="fonts/#Lato"
+        Loaded="Window_Loaded"
+        Background="{StaticResource WindowBackground}"
+        Title="MainWindow" Height="460" Width="302">    
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" 
+                  Background="{StaticResource DefaultBlue}" 
+                  Name="TopBlock" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" 
+                           Text="Hoje, 17 de Jan" 
+                           Foreground="White" 
+                           VerticalAlignment="Center" 
+                           Margin="8" 
+                           x:Name="Header"
+                           FontWeight="SemiBold"
+                           FontSize="16" />
+                <!--
+                <Button Style="{StaticResource FontAwesomeButton}" fa:Awesome.Content="Close"
+                    HorizontalAlignment="Right"
+                    Grid.Column="1"
+                    Margin="0,-10,6,0"
+                    Foreground="White"
+                    FontSize="20"
+                    x:Name="btnClose"
+                    Click="btnClose_Click" />
+                -->
+            <Button Grid.Column="1" Style="{StaticResource FontAwesomeButton}" HorizontalAlignment="Right" Width="32" Margin="0,0,4,0">
+                <Grid>
+                    <Border Height="20" 
+                            Width="2" 
+                            Background="White"  
+                            CornerRadius="2">
+                        <Border.RenderTransform>
+                            <RotateTransform CenterX="1" CenterY="10" Angle="45" />
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border Height="20" 
+                            Width="2" 
+                            Background="White"  
+                            CornerRadius="2">
+                        <Border.RenderTransform>
+                            <RotateTransform CenterX="1" CenterY="10" Angle="-45" />
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+            </Button>
+            </Grid>
+            <local:DailyTasks  Grid.Row="1" />
+        </Grid>    
 </Window>

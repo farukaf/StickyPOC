@@ -1,5 +1,7 @@
-﻿using System;
+﻿using StickyPOC.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,18 @@ namespace StickyPOC
     /// </summary>
     public partial class DailyTasks : UserControl
     {
+        public DailyTasksViewModel ViewModel { get; set; }
+
         public DailyTasks()
         {
-            InitializeComponent();
+            InitializeComponent();            
+
+            DataContext = ViewModel = new DailyTasksViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(gridDayList.ActualWidth);
         }
     }
 }
