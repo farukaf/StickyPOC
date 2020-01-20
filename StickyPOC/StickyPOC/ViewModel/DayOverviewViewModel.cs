@@ -57,12 +57,13 @@ namespace StickyPOC.ViewModel
                     return new Color()
                     {
                         ScA = 0,
-                        ScR = 1,
-                        ScG = 1,
-                        ScB = 1,
+                        R = 0,
+                        G = 115,
+                        B = 193,
                     };
                 }
             }
         }
+
     }
 }
