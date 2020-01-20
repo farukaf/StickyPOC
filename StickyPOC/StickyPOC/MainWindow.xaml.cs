@@ -27,9 +27,11 @@ namespace StickyPOC
             {
                 DefaultValue = FindResource(typeof(Window))
             });
+
 #if DEBUG
             this.ShowInTaskbar = true;
 #endif
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -45,8 +47,7 @@ namespace StickyPOC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(Header.FontFamily.ToString());
-            System.Diagnostics.Debug.WriteLine(this.FontFamily.ToString());
         }
+
     }
 }

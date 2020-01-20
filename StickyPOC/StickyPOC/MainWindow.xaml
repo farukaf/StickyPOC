@@ -14,6 +14,7 @@
         BorderThickness="1"
         FontFamily="fonts/#Lato"
         Loaded="Window_Loaded"
+        
         Background="{StaticResource WindowBackground}"
         Title="MainWindow" Height="460" Width="302">    
         <Grid>
@@ -46,7 +47,7 @@
                     x:Name="btnClose"
                     Click="btnClose_Click" />
                 -->
-            <Button Grid.Column="1" Style="{StaticResource FontAwesomeButton}" HorizontalAlignment="Right" Width="32" Margin="0,0,4,0">
+            <Button Grid.Column="1" Style="{StaticResource FontAwesomeButton}" HorizontalAlignment="Right" Width="32" Margin="0,0,4,0" Name="btnClose" Click="btnClose_Click">
                 <Grid>
                     <Border Height="20" 
                             Width="2" 

@@ -1,21 +1,43 @@
-﻿using System;
+﻿using StickyPOC.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace StickyPOC.ViewModel
 {
-    public class DayOverviewViewModel
+    public class DayOverviewViewModel : ViewModelBase
     {
+        public DayOverviewViewModel()
+        {
+            Tasks = new ObservableCollection<DayOverviewTaskViewModel>();
+        }
+       public ObservableCollection<DayOverviewTaskViewModel> Tasks { get; set; }
+
         public DateTime Date { get; set; }
         public string Day { get { return Date.Day.ToString(); } }
 
         public TimeSpan WorkedTime { get; set; }
         public string WorkedTimeShow { get { return WorkedTime.TotalHours.ToString("##0") + ":" + WorkedTime.Minutes.ToString("00"); } }
 
-        public bool IsSelected { get; set; }
+        private bool _IsSelected { get; set; }
+        public bool IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                _IsSelected = value;
+                this.OnPropertyChanged(nameof(this.IsSelected));
+                this.OnPropertyChanged(nameof(this.ButtonBackGroundColor));
+            }
+        }
         public Color ButtonBackGroundColor
         {
             get

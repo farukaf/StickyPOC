@@ -26,7 +26,7 @@ namespace StickyPOC
 
         public DailyTasks()
         {
-            InitializeComponent();            
+            InitializeComponent();
 
             DataContext = ViewModel = new DailyTasksViewModel();
         }
@@ -34,6 +34,30 @@ namespace StickyPOC
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(gridDayList.ActualWidth);
+        }
+
+        private void btnDay_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            var dayOverView = btn.DataContext as DayOverviewViewModel;
+            if (!dayOverView.IsSelected)
+            {
+                ViewModel.IsBusy = true;
+                Task.Run(async () =>
+                {
+                    foreach (var day in ViewModel.DayList)
+                    {
+                        day.IsSelected = false;
+                    }
+
+                    dayOverView.IsSelected = true;
+
+                    //finge que ta carregando as tasks da api
+                    await Task.Delay(2222);
+
+                    ViewModel.IsBusy = false;
+                });
+            }
         }
     }
 }
