@@ -13,8 +13,7 @@
         BorderBrush="Gray"
         BorderThickness="1"
         FontFamily="fonts/#Lato"
-        Loaded="Window_Loaded"
-        
+        Loaded="Window_Loaded"        
         Background="{StaticResource WindowBackground}"
         Title="MainWindow" Height="460" Width="302">    
         <Grid>
@@ -68,6 +67,6 @@
                 </Grid>
             </Button>
             </Grid>
-            <local:DailyTasks  Grid.Row="1" />
+            <local:DailyTasks  Grid.Row="1" x:Name="LowerBlock" />
         </Grid>    
 </Window>

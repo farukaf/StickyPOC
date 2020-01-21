@@ -47,6 +47,15 @@ namespace StickyPOC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Prjt Teste",
+                    Status = "Testing",
+                    TaskID = "NS-1234",
+                    Title = "Bug fixes on post",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
         }
 
     }

@@ -15,6 +15,7 @@ namespace StickyPOC.ViewModel
         public DayOverviewViewModel()
         {
             Tasks = new ObservableCollection<DayOverviewTaskViewModel>();
+            IsSelected = false;
         }
        public ObservableCollection<DayOverviewTaskViewModel> Tasks { get; set; }
 

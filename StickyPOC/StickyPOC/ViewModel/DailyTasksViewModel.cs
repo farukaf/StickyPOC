@@ -1,10 +1,13 @@
-﻿using System;
+﻿using StickyPOC.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace StickyPOC.ViewModel
 {
@@ -12,6 +15,7 @@ namespace StickyPOC.ViewModel
     {
         public DailyTasksViewModel()
         {
+            TasksControl = new ObservableCollection<DayOverviewTaskViewModel>();
             DayList = new ObservableCollection<DayOverviewViewModel>();
 
             DayList.Add(new DayOverviewViewModel()
@@ -29,31 +33,12 @@ namespace StickyPOC.ViewModel
                 Date = DateTime.Now.AddDays(-1),
                 WorkedTime = new TimeSpan(3, 10, 0)
             });
-            var today = new DayOverviewViewModel()
+            DayList.Add(new DayOverviewViewModel()
             {
                 Date = DateTime.Now,
                 IsSelected = true,
                 WorkedTime = new TimeSpan(3, 10, 0),
-                Tasks = new ObservableCollection<DayOverviewTaskViewModel>()
-                {
-                    new DayOverviewTaskViewModel() {
-                        Project = "Projeto Teste",
-                        Status = "Testing",
-                        TaskID = "NS-12345",
-                        Title = "Bug Integração Teste",
-                        WorkedTime = new TimeSpan(1,5,0)
-                    },
-                    new DayOverviewTaskViewModel() {
-                        Project = "Projeto Teste",
-                        Status = "Testing",
-                        TaskID = "NS-12346",
-                        Title = "Adição de Categoria Adição de Categoria Adição de Categoria Adição de Categoria",
-                        WorkedTime = new TimeSpan(2,5,0)
-                    },
-                }
-            };
-            DayList.Add(today);
-            TasksControl = today.Tasks;
+            });
             DayList.Add(new DayOverviewViewModel()
             {
                 Date = DateTime.Now.AddDays(1),
@@ -71,7 +56,19 @@ namespace StickyPOC.ViewModel
             });
 
             IsBusy = false;
+            SelectedMonth = DateTime.Now.Month;
+            SelectedYear = DateTime.Now.Year;
         }
+        public int SelectedYear { get; set; }
+        public int SelectedMonth { get; set; }
+        public string SelectedMonthName
+        {
+            get
+            {
+                return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(SelectedMonth).ToUpper();
+            }
+        }
+
         public ObservableCollection<DayOverviewTaskViewModel> TasksControl { get; set; }
         public ObservableCollection<DayOverviewViewModel> DayList { get; set; }
 
@@ -131,6 +128,55 @@ namespace StickyPOC.ViewModel
 
             //finge que ta carregando as tasks da api
             await Task.Delay(222);
+
+            IsBusy = false;
+        }
+
+        private ICommand _OneDayBeforeClick { get; set; }
+        public ICommand OneDayBeforeClick
+        {
+            get
+            {
+                return _OneDayBeforeClick ?? (_OneDayBeforeClick = new CommandHandler(() => OneDayBeforeAction(), () => OneDayBeforeAllow()));
+            }
+        }
+
+        public bool OneDayBeforeAllow()
+        {
+            return !IsBusy && DayList[0].Date.Day > 1;
+        }
+
+        public void OneDayBeforeAction()
+        {
+            IsBusy = true;
+            DayList.RemoveAt(DayList.Count - 1);
+            DayList.Insert(0, new DayOverviewViewModel() { Date = DayList[0].Date.AddDays(-1) });
+
+            IsBusy = false;
+        }
+        //after
+        private ICommand _OneDayAfterClick { get; set; }
+        public ICommand OneDayAfterClick
+        {
+            get
+            {
+                return _OneDayAfterClick ?? (_OneDayAfterClick = new CommandHandler(() => OneDayAfterAction(), () => OneDayAfterAllow()));
+            }
+        }
+
+        public bool OneDayAfterAllow()
+        {
+            var _date = DayList.Last().Date;
+            var daysInMonth = DateTime.DaysInMonth(_date.Year, _date.Month);
+            return !IsBusy && _date.Day < daysInMonth;
+        }
+
+        public void OneDayAfterAction()
+        {
+            IsBusy = true;
+            var _date = DayList.Last().Date;
+            DayList.RemoveAt(0);
+            DayList.Add(new DayOverviewViewModel() { Date = _date.AddDays(+1) });
 
             IsBusy = false;
         }
