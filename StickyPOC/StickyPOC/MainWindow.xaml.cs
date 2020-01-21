@@ -53,7 +53,61 @@ namespace StickyPOC
                     Project = "Prjt Teste",
                     Status = "Testing",
                     TaskID = "NS-1234",
-                    Title = "Bug fixes on post",
+                    Title = "Bug fixes on post Bug fixes on post Bug fixes on post Bug fixes on post Bug fixes on post Bug fixes on post ",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Project",
+                    Status = "Status",
+                    TaskID = "TaskID",
+                    Title = "Title",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Project",
+                    Status = "Status",
+                    TaskID = "TaskID",
+                    Title = "Title",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Project",
+                    Status = "Status",
+                    TaskID = "TaskID",
+                    Title = "Title",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Project",
+                    Status = "Status",
+                    TaskID = "TaskID",
+                    Title = "Title",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Project",
+                    Status = "Status",
+                    TaskID = "TaskID",
+                    Title = "Title",
+                    WorkedTime = new TimeSpan(2, 15, 0),
+                });
+            LowerBlock.ViewModel.TasksControl.Add(
+                new ViewModel.DayOverviewTaskViewModel()
+                {
+                    Project = "Project",
+                    Status = "Status",
+                    TaskID = "TaskID",
+                    Title = "Title",
                     WorkedTime = new TimeSpan(2, 15, 0),
                 });
         }
