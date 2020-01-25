@@ -62,3 +62,5 @@ C:\Users\user_desenv12\source\repos\StickyPOC\StickyPOC\StickyPOC\obj\Debug\Stic
 C:\Users\user_desenv12\source\repos\StickyPOC\StickyPOC\StickyPOC\obj\Debug\StickyPOC.csproj.CopyComplete
 C:\Users\user_desenv12\source\repos\StickyPOC\StickyPOC\StickyPOC\obj\Debug\StickyPOC.exe
 C:\Users\user_desenv12\source\repos\StickyPOC\StickyPOC\StickyPOC\obj\Debug\StickyPOC.pdb
+C:\Users\Faruk\source\repos\farukaf\StickyPOC\StickyPOC\StickyPOC\obj\Debug\DailyAppointments.g.cs
+C:\Users\Faruk\source\repos\farukaf\StickyPOC\StickyPOC\StickyPOC\obj\Debug\DailyAppointments.baml

@@ -5,8 +5,9 @@
              xmlns:vm="clr-namespace:StickyPOC.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-        <vm:DailyTasksViewModel x:Key="DailyTasksViewModel" />
+
+        <vm:DailyAppointmentsViewModel x:Key="DailyAppointmentsViewModel" />
+        <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
         
         <SolidColorBrush x:Key="WindowBackground" Color="#FEFEFE" />
         <SolidColorBrush x:Key="ButtonDefaultBackground" Color="#F0F0F0" />

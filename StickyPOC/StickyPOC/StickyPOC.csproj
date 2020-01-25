@@ -58,11 +58,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DailyAppointments.xaml.cs">
+      <DependentUpon>DailyAppointments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\CommandHandler.cs" />
+    <Compile Include="ViewModel\DailyAppointmentsViewModel.cs" />
     <Compile Include="ViewModel\DailyTasksViewModel.cs" />
     <Compile Include="ViewModel\DayOverviewTaskViewModel.cs" />
     <Compile Include="ViewModel\DayOverviewViewModel.cs" />
+    <Compile Include="ViewModel\DayAppointmentsOverviewViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Page Include="DailyAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DailyTasks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

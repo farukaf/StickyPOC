@@ -15,6 +15,7 @@
         FontFamily="fonts/#Lato"
         Loaded="Window_Loaded"        
         Background="{StaticResource WindowBackground}"
+        DataContext="{StaticResource MainWindowViewModel}"
         Title="MainWindow" Height="460" Width="302">    
         <Grid>
             <Grid.RowDefinitions>
@@ -29,11 +30,11 @@
                     <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" 
-                           Text="Hoje, 17 de Jan" 
+                           Text="{Binding HeaderDate, UpdateSourceTrigger=PropertyChanged}" 
                            Foreground="White" 
                            VerticalAlignment="Center" 
                            Margin="8" 
-                           x:Name="Header"
+                           x:Name="TextBlockHeader"
                            FontWeight="SemiBold"
                            FontSize="16" />
                 <!--
@@ -67,6 +68,6 @@
                 </Grid>
             </Button>
             </Grid>
-            <local:DailyTasks  Grid.Row="1" x:Name="LowerBlock" />
+            <local:DailyAppointments  Grid.Row="1" x:Name="LowerBlock" />
         </Grid>    
 </Window>
