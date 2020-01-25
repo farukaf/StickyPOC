@@ -1,0 +1,222 @@
+﻿<Window x:Class="StickyPOC.Views.MonthPickerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StickyPOC.Views"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ShowInTaskbar="True"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown"
+        BorderBrush="Gray"
+        DataContext="{StaticResource MonthPickerDialogViewModel}"
+        BorderThickness="1"
+        FontFamily="fonts/#Lato"
+        Title="MonthPicker" 
+        Height="190"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Width="162">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="MonthPick" >
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="2"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="0"  Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.6"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#300073C1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" 
+              Panel.ZIndex="100"
+                  Background="{StaticResource DefaultBlue}" 
+                  Name="TopBlock" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Ano selecionado:" FontSize="12" Height="24" Foreground="White" Margin="-2,0,0,0"  Target="{Binding ElementName=cbYear}"  VerticalAlignment="Top" />
+                <ComboBox Grid.Row="1"
+                          Name="cbYear" 
+                          FontSize="14"
+                          SelectedValuePath="Key" 
+                          DisplayMemberPath="Value"
+                          SelectedValue="{Binding SelectedYear}"
+                          ItemsSource="{Binding YearCollection}"
+                          Style="{StaticResource TransparentCombobox}">
+
+                </ComboBox>
+            </Grid>
+            <Button Grid.Column="1" Style="{StaticResource FontAwesomeButton}" Name="btnClose" Click="btnClose_Click">
+                <Grid>
+                    <Border Height="20" 
+                                Width="2" 
+                                Background="White"  
+                                CornerRadius="2">
+                        <Border.RenderTransform>
+                            <RotateTransform CenterX="1" CenterY="10" Angle="45" />
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border Height="20" 
+                                Width="2" 
+                                Background="White"  
+                                CornerRadius="2">
+                        <Border.RenderTransform>
+                            <RotateTransform CenterX="1" CenterY="10" Angle="-45" />
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Jan" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnJan" 
+                    Grid.Column="0"
+                    Grid.Row="0" 
+                    DataContext="1"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Fev" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnFev" 
+                    Grid.Column="1" 
+                    Grid.Row="0" 
+                    DataContext="2"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Mar"
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnMar" 
+                    Grid.Column="2"
+                    Grid.Row="0" 
+                    DataContext="3"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Abr" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnAbr" 
+                    Grid.Column="3" 
+                    Grid.Row="0"
+                    DataContext="4"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Mai" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnMai" 
+                    Grid.Column="0" 
+                    Grid.Row="1"
+                    DataContext="5"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Jun"
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnJun" 
+                    Grid.Column="1" 
+                    DataContext="6"
+                    Grid.Row="1" Style="{StaticResource MonthPick}" />
+
+            <Button Content="Jul" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnJul"
+                    Grid.Column="2" 
+                    Grid.Row="1"
+                    DataContext="7"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Ago"
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnAgo" 
+                    Grid.Column="3"
+                    Grid.Row="1" 
+                    DataContext="8"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Set" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnSet"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    DataContext="9"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Out" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnOut" 
+                    Grid.Column="1"
+                    Grid.Row="2" 
+                    DataContext="10"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Nov" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnNov" 
+                    Grid.Column="2" 
+                    Grid.Row="2"
+                    DataContext="11"
+                    Style="{StaticResource MonthPick}" />
+
+            <Button Content="Dez" 
+                    Click="btnMes_Click"
+                    MouseDoubleClick="btnMes_MouseDoubleClick"
+                    Name="btnDez" 
+                    Grid.Column="3"
+                    Grid.Row="2"
+                    DataContext="12"
+                    Style="{StaticResource MonthPick}" />
+
+        </Grid>
+    </Grid>
+</Window>

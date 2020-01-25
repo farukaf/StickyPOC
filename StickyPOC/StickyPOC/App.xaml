@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StickyPOC"
              xmlns:vm="clr-namespace:StickyPOC.ViewModel"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-
-        <vm:DailyAppointmentsViewModel x:Key="DailyAppointmentsViewModel" />
-        <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
         
         <SolidColorBrush x:Key="WindowBackground" Color="#FEFEFE" />
         <SolidColorBrush x:Key="ButtonDefaultBackground" Color="#F0F0F0" />
         <SolidColorBrush x:Key="DefaultBlue" Color="#0073C1" />
+        <SolidColorBrush x:Key="DefaultRed" Color="#E3463F" />
+
+        <vm:DailyTasksViewModel x:Key="DailyTasksViewModel" />
+        <vm:DailyAppointmentsViewModel x:Key="DailyAppointmentsViewModel" />
+        <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
+        <vm:MonthPickerDialogViewModel x:Key="MonthPickerDialogViewModel" />
 
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontFamily" Value="/StickyPOC;component/Resources/Fonts/#Lato Regular" />
@@ -19,6 +22,7 @@
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="{StaticResource ButtonDefaultBackground}" />
+            <Setter Property="Cursor" Value="Hand"/>
             
             <Setter Property="Template">
                 <Setter.Value>
@@ -45,7 +49,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0" CornerRadius="0">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -55,6 +59,32 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Opacity" Value="0.6"/>
                     <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="CloseButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Width" Value="38" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0" CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#28FFFFFF"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -174,6 +204,93 @@
             </Setter>
         </Style>
 
+        <Style TargetType="{x:Type Calendar}">
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        
+        <Style TargetType="{x:Type ComboBox}" x:Key="TransparentCombobox">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid x:Name="Gd">
+                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="0" BorderBrush="Transparent" BorderThickness="1" />
+                                            <Border Grid.Column="0" CornerRadius="5,0,0,5"  Margin="1"  Background="Transparent"  BorderBrush="Transparent" BorderThickness="1" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Opacity="1" BorderBrush="Transparent" BorderThickness="0" Background="{StaticResource DefaultBlue}" />
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Gd" Value="#30FFFFFF"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="2,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="True">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#30FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#EEE"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Application.Resources>
 </Application>

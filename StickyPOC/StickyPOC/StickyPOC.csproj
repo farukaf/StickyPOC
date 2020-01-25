@@ -40,6 +40,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,7 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DailyAppointments.xaml.cs">
+    <Compile Include="ViewModel\MonthPickerDialogViewModel.cs" />
+    <Compile Include="Views\DailyAppointments.xaml.cs">
       <DependentUpon>DailyAppointments.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\CommandHandler.cs" />
@@ -69,15 +72,18 @@
     <Compile Include="ViewModel\DayAppointmentsOverviewViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Page Include="DailyAppointments.xaml">
+    <Compile Include="Views\MonthPickerDialog.xaml.cs">
+      <DependentUpon>MonthPickerDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\DailyAppointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DailyTasks.xaml">
+    <Page Include="Views\DailyTasks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -85,13 +91,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DailyTasks.xaml.cs">
+    <Compile Include="Views\DailyTasks.xaml.cs">
       <DependentUpon>DailyTasks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MonthPickerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

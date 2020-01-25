@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StickyPOC
+namespace StickyPOC.Views
 {
     /// <summary>
     /// Interaction logic for DailyAppointments.xaml
@@ -32,6 +32,17 @@ namespace StickyPOC
             var btn = sender as Button;
             var dayOverView = btn.DataContext as DayOverviewViewModel;
             _ = ViewModel.btnDay_Click(dayOverView);
+        }
+
+        private void btnCalendar_Click(object sender, RoutedEventArgs e)
+        {
+            MonthPickerDialog monthPicker = new MonthPickerDialog(ViewModel.SelectedMonth, ViewModel.SelectedYear);
+
+            monthPicker.ShowDialog();
+            if (monthPicker.SelectedDateTime != null)
+            {
+                MessageBox.Show(monthPicker.SelectedDateTime.Value.ToLongDateString());
+            }
         }
     }
 }

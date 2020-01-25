@@ -14,9 +14,13 @@ namespace StickyPOC.ViewModel
             {
                 if (DailyAppointmentsViewModel != null)
                 {
-                    return DailyAppointmentsViewModel.SelectedDay.Date.ToString("ddd, dd") +
+                    string ret = DailyAppointmentsViewModel.SelectedDay.Date.ToString("ddd, dd") +
                         " de " +
                        DailyAppointmentsViewModel.SelectedDay.Date.ToString("MMM");
+
+                    ret = ret.ToLower();
+
+                    return ret.First().ToString().ToUpper() + ret.Substring(1);
                 }
                 return "--";
             }
