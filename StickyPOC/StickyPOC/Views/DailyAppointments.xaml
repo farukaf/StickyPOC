@@ -111,7 +111,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0" ToolTip="ID da tarefa" Text="{Binding TaskID}" HorizontalAlignment="Left" Foreground="Gray" FontSize="12"/>
                                         <TextBlock Grid.Row="0" ToolTip="Status atual da tarefa" Text="{Binding Status}" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Bold" FontSize="12"/>
-                                        <TextBlock Grid.Row="1" ToolTip="Título da tarefa" Text="{Binding Title}" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" />
+                                        <TextBlock Grid.Row="1" ToolTip="Título da tarefa" Text="{Binding Title}" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" />
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="1,12">
                                         <Grid.RowDefinitions>

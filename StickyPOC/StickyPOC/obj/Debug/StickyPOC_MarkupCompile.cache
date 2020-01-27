@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Faruk\source\repos\farukaf\StickyPOC\StickyPOC\StickyPOC\obj\Debug\
+C:\Users\user_desenv12\Source\Repos\StickyPOC\StickyPOC\StickyPOC\obj\Debug\
 StickyPOC
 none
 false
 DEBUG;TRACE
-C:\Users\Faruk\source\repos\farukaf\StickyPOC\StickyPOC\StickyPOC\App.xaml
+C:\Users\user_desenv12\Source\Repos\StickyPOC\StickyPOC\StickyPOC\App.xaml
 41036906092
 18744830968
 17-1183545620
-16-279579266
+16623055922
 Views\DailyAppointments.xaml;Views\DailyTasks.xaml;Views\MainWindow.xaml;Views\MonthPickerDialog.xaml;
 
-False
+True
 
